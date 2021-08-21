@@ -1,10 +1,13 @@
 var ghost1, ghost2, ghost3, ghost4, ghost1_img, ghost2_img, ghost3_img, ghost4_img;
 var pacman, pacman_img;
-var wall1, wall2, wall3, wall4, wall5, wall6, wall7, wall8, wall9, wall10,
+var lives = 2;
+var gameState = "serve";
+var dot1, dot2, dot3, dot4, dot5;
+var border1, border2, border3, border4, wall1, wall2, wall3, wall4, wall5, wall6, wall7, wall8, wall9, wall10,
     wall11, wall12, wall13, wall14, wall15, wall16, wall17, wall18, wall19,
     wall20, wall21, wall22, wall23, wall24, wall25, wall26, wall27, wall28, wall29,
     wall30, wall31, wall32, wall33, wall34, wall35, wall36, wall37, wall38, wall39, wall40,
-    wall41, wall42, wall43, wall44, wall45, wall46, wall47, wall48, wall49;
+    wall41, wall42, wall43, wall44, wall45, wall46, wall47, wall48, wall49, wall50;
 
 function preload() {
     pacman_img = loadImage("pacman.png");
@@ -31,108 +34,76 @@ function setup() {
     ghost4.addImage("red", ghost2_img);
     ghost4.scale = 0.05;
 
-    wall1 = createSprite(5, 300, 10, 600);
-    wall1.shapeColor = "white";
-    wall2 = createSprite(595, 300, 10, 600);
-    wall2.shapeColor = "white";
-    wall3 = createSprite(300, 600, 580, 10);
-    wall3.shapeColor = "white";
-    wall4 = createSprite(300, 600, 580, 10);
-    wall4.shapeColor = "white";
-    wall5 = createSprite(250, 300, 10, 90);
-    wall5.shapeColor = "white";
-    wall6 = createSprite(295, 350, 100, 10);
-    wall6.shapeColor = "white";
-    wall7 = createSprite(340, 300, 10, 90);
-    wall7.shapeColor = "white";
-    wall8 = createSprite(200, 305, 10, 100);
-    wall8.shapeColor = "white";
-    wall9 = createSprite(400, 305, 10, 100);
-    wall9.shapeColor = "white";
-    wall10 = createSprite(450, 310, 100, 10);
-    wall10.shapeColor = "white";
-    wall11 = createSprite(570, 310, 50, 10);
-    wall11.shapeColor = "white";
-    wall12 = createSprite(440, 360, 10, 100);
-    wall12.shapeColor = "white";
-    wall13 = createSprite(200, 400, 10, 100);
-    wall13.shapeColor = "white";
-    wall14 = createSprite(400, 450, 10, 100);
-    wall14.shapeColor = "white";
-    wall15 = createSprite(530, 260, 180, 10);
-    wall15.shapeColor = "white";
-    wall16 = createSprite(450, 200, 200, 10);
-    wall16.shapeColor = "white";
-    wall17 = createSprite(545, 150, 10, 100);
-    wall17.shapeColor = "white";
-    wall18 = createSprite(500, 110, 10, 100);
-    wall18.shapeColor = "white";
-    wall19 = createSprite(200, 300, 10, 100);
-    wall19.shapeColor = "white";
-    wall20 = createSprite(200, 200, 10, 100);
-    wall20.shapeColor = "white";
-    wall21 = createSprite(445, 155, 100, 10);
-    wall21.shapeColor = "white";
-    wall22 = createSprite(255, 445, 100, 10);
-    wall22.shapeColor = "white";
-    wall23 = createSprite(300, 200, 100, 10);
-    wall23.shapeColor = "white";
-    wall24 = createSprite(540, 550, 190, 10);
-    wall24.shapeColor = "white";
-    wall25 = createSprite(340, 550, 100, 10);
-    wall25.shapeColor = "white";
-    wall26 = createSprite(200, 180, 10, 100);
-    wall26.shapeColor = "white";
-    wall27 = createSprite(320, 405, 150, 10);
-    wall27.shapeColor = "white";
-    wall28 = createSprite(320, 405, 150, 10);
-    wall28.shapeColor = "white";
-    wall29 = createSprite(360, 500, 10, 100);
-    wall29.shapeColor = "white";
-    wall30 = createSprite(200, 500, 10, 100);
-    wall30.shapeColor = "white";
-    wall31 = createSprite(300, 145, 10, 100);
-    wall31.shapeColor = "white";
-    wall32 = createSprite(145, 200, 100, 10);
-    wall32.shapeColor = "white";
-    wall33 = createSprite(100, 100, 10, 100);
-    wall33.shapeColor = "white";
-    wall34 = createSprite(300, 100, 100, 10);
-    wall34.shapeColor = "white";
-    wall35 = createSprite(155, 100, 100, 10);
-    wall35.shapeColor = "white";
-    wall36 = createSprite(100, 250, 100, 10);
-    wall36.shapeColor = "white";
-    wall37 = createSprite(150, 290, 100, 10);
-    wall37.shapeColor = "white";
-    wall38 = createSprite(105, 345, 10, 100);
-    wall38.shapeColor = "white";
-    wall39 = createSprite(130, 330, 50, 10);
-    wall39.shapeColor = "white";
-    wall40 = createSprite(350, 100, 100, 10);
-    wall40.shapeColor = "white";
-    wall41 = createSprite(310, 500, 100, 10);
-    wall41.shapeColor = "white";
-    wall42 = createSprite(100, 430, 100, 10);
-    wall42.shapeColor = "white";
-    wall43 = createSprite(155, 500, 100, 10);
-    wall43.shapeColor = "white";
-    wall44 = createSprite(550, 500, 10, 100);
-    wall44.shapeColor = "white";
-    wall45 = createSprite(455, 495, 100, 10);
-    wall45.shapeColor = "white";
-    wall46 = createSprite(200, 550, 100, 10);
-    wall46.shapeColor = "white";
-    wall47 = createSprite(100, 100, 100, 10);
-    wall47.shapeColor = "white";
-    wall48 = createSprite(445, 65, 100, 10);
-    wall48.shapeColor = "white";
-    wall49 = createSprite(495, 405, 100, 10);
-    wall49.shapeColor = "white";
+    border1 = createSprite(5, 300, 10, 600);
+    border1.shapeColor = "darkblue";
+    border2 = createSprite(595, 300, 10, 600);
+    border2.shapeColor = "darkblue";
+    border3 = createSprite(300, 595, 580, 10);
+    border3.shapeColor = "darkblue";
+    border4 = createSprite(300, 5, 600, 10);
+    border4.shapeColor = "darkblue"
+    wall1 = createSprite(250, 300, 10, 90);
+    wall1.shapeColor = "darkblue";
+    wall2 = createSprite(295, 350, 100, 10);
+    wall2.shapeColor = "darkblue";
+    wall3 = createSprite(340, 300, 10, 90);
+    wall3.shapeColor = "darkblue";
+    //right bottom walls
+    wall4 = createSprite(550, 550, 10, 10);
+    wall4.shapeColor = "darkblue";
+    wall5 = createSprite(510, 580, 10, 80);
+    wall5.shapeColor = "darkblue";
+    wall5 = createSprite(580, 510, 80, 10);
+    wall5.shapeColor = "darkblue";
+    wall6 = createSprite(510, 460, 10, 100);
+    wall6.shapeColor = "darkblue";
+    wall7 = createSprite(550, 415, 80, 10);
+    wall7.shapeColor = "darkblue";
+    wall8 = createSprite(550, 460, 10, 10);
+    wall8.shapeColor = "darkblue";
+    //right middle walls
+    rm1 = createSprite(500, 350, 100, 10);
+    rm1.shapeColor = "darkblue";
+    rm2 = createSprite(455, 430, 10, 150);
+    rm2.shapeColor = "darkblue";
+    rm3 = createSprite(500, 250, 100, 10);
+    rm3.shapeColor = "darkblue";
+    rm4 = createSprite(455, 170, 10, 150);
+    rm4.shapeColor = "darkblue";
+    rm5 = createSprite(480, 300, 140, 10);
+    rm5.shapeColor = "darkblue";
+    rm6 = createSprite(410, 300, 10, 410);
+    rm6.shapeColor = "darkblue";
+    //right top walls
+    wall9 = createSprite(550, 50, 10, 10);
+    wall9.shapeColor = "darkblue";
+    wall10 = createSprite(510, 20, 10, 80);
+    wall10.shapeColor = "darkblue";
+    wall11 = createSprite(580, 90, 80, 10);
+    wall11.shapeColor = "darkblue";
+    wall12 = createSprite(510, 140, 10, 100);
+    wall12.shapeColor = "darkblue";
+    wall13 = createSprite(550, 185, 80, 10);
+    wall13.shapeColor = "darkblue";
+    wall14 = createSprite(550, 140, 10, 10);
+    wall14.shapeColor = "darkblue";
+    //left bottom wall
+    wall15 = createSprite(550, 550, 10, 10);
+    wall15.shapeColor = "darkblue";
+    wall16 = createSprite(510, 580, 10, 80);
+    wall16.shapeColor = "darkblue";
+    wall17 = createSprite(580, 510, 80, 10);
+    wall17.shapeColor = "darkblue";
+    wall18 = createSprite(510, 460, 10, 100);
+    wall18.shapeColor = "darkblue";
+    wall19 = createSprite(550, 415, 80, 10);
+    wall19.shapeColor = "darkblue";
+    wall20 = createSprite(550, 460, 10, 10);
+    wall20.shapeColor = "darkblue";
 }
 
 function draw() {
-    background("darkblue");
+    background("black");
     if (keyDown("up")) {
         pacman.y = pacman.y - 5
     }
@@ -156,6 +127,10 @@ function draw() {
 }
 
 function objectCollide(sprite) {
+    sprite.collide(border1);
+    sprite.collide(border2);
+    sprite.collide(border3);
+    sprite.collide(border4);
     sprite.collide(wall1);
     sprite.collide(wall2);
     sprite.collide(wall3);
@@ -176,33 +151,10 @@ function objectCollide(sprite) {
     sprite.collide(wall18);
     sprite.collide(wall19);
     sprite.collide(wall20);
-    sprite.collide(wall21);
-    sprite.collide(wall22);
-    sprite.collide(wall23);
-    sprite.collide(wall24);
-    sprite.collide(wall25);
-    sprite.collide(wall26);
-    sprite.collide(wall27);
-    sprite.collide(wall28);
-    sprite.collide(wall29);
-    sprite.collide(wall30);
-    sprite.collide(wall31);
-    sprite.collide(wall32);
-    pacman.collide(wall33);
-    sprite.collide(wall34);
-    sprite.collide(wall35);
-    sprite.collide(wall36);
-    sprite.collide(wall37);
-    sprite.collide(wall38);
-    sprite.collide(wall39);
-    sprite.collide(wall40);
-    sprite.collide(wall41);
-    sprite.collide(wall42);
-    sprite.collide(wall43);
-    sprite.collide(wall44);
-    sprite.collide(wall45);
-    sprite.collide(wall46);
-    sprite.collide(wall47);
-    sprite.collide(wall48);
-    sprite.collide(wall49);
+    sprite.collide(rm1);
+    sprite.collide(rm2);
+    sprite.collide(rm3);
+    sprite.collide(rm4);
+    sprite.collide(rm5);
+    sprite.collide(rm6);
 }
